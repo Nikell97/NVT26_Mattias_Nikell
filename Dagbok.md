@@ -5,4 +5,5 @@ Fredag - Gjorde första checkpoint övningen i Packet Tracer. Kunde inte utföra
 Detta verkar inte vara p.g.a. fel läge då jag prövade i användarläge, priviligierat läge, och konfigurationsläge. Gjorde istället en reboot för att kolla att ändringar sparats till startup-config.  
 
 # Vecka 2  
-Onsdag - Läste fram till kapitel 2.3 samt tog anteckningar
+Onsdag - Läste fram till kapitel 2.3 samt tog anteckningar  
+Torsdag - Gjorde Python övning oui.py.  Uppdaterade filstruktur i GitHub repo för att bättre matcha utseendet visat i boken.
