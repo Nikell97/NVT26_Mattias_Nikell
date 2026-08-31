@@ -1,0 +1,53 @@
+mattias-n@mattias-n-ASUS-EXPERTBOOK-B1403CVA:~$ cd Documents/
+mattias-n@mattias-n-ASUS-EXPERTBOOK-B1403CVA:~/Documents$ cd GitHub/
+mattias-n@mattias-n-ASUS-EXPERTBOOK-B1403CVA:~/Documents/GitHub$ pwd
+/home/mattias-n/Documents/GitHub
+mattias-n@mattias-n-ASUS-EXPERTBOOK-B1403CVA:~/Documents/GitHub$ git clone git@github.com:saldes-education/jensen-nvt26.git'
+> ^C
+mattias-n@mattias-n-ASUS-EXPERTBOOK-B1403CVA:~/Documents/GitHub$ git clone git@github.com:saldes-education/jensen-nvt26.git
+Cloning into 'jensen-nvt26'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+mattias-n@mattias-n-ASUS-EXPERTBOOK-B1403CVA:~/Documents/GitHub$ sudo apt install gh
+[sudo: authenticate] Password:           
+Installing:                     
+  gh
+
+Summary:
+  Upgrading: 0, Installing: 1, Removing: 0, Not Upgrading: 136
+  Download size: 8547 kB
+  Space needed: 37.1 MB / 461 GB available
+
+Get:1 http://se.archive.ubuntu.com/ubuntu resolute/universe amd64 gh amd64 2.46.0-4 [8547 kB]
+Fetched 8547 kB in 3s (2463 kB/s)
+Selecting previously unselected package gh.
+(Reading database ... 196383 files and directories currently installed.)
+Preparing to unpack .../archives/gh_2.46.0-4_amd64.deb ...
+Unpacking gh (2.46.0-4) ...
+Setting up gh (2.46.0-4) ...
+Processing triggers for man-db (2.13.1-1build1) ...
+mattias-n@mattias-n-ASUS-EXPERTBOOK-B1403CVA:~/Documents/GitHub$ gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations on this host? HTTPS
+? Authenticate Git with your GitHub credentials? Yes
+? How would you like to authenticate GitHub CLI? Login with a web browser
+
+! First copy your one-time code: 35C3-3C4A
+Press Enter to open github.com in your browser... Gtk-Message: 14:59:43.161: Not loading module "atk-bridge": The functionality is provided by GTK natively. Please try to not load it.
+
+✓ Authentication complete.
+- gh config set -h github.com git_protocol https
+✓ Configured git protocol
+✓ Logged in as Nikell97
+mattias-n@mattias-n-ASUS-EXPERTBOOK-B1403CVA:~/Documents/GitHub$ 
+mattias-n@mattias-n-ASUS-EXPERTBOOK-B1403CVA:~/Documents/GitHub$ git clone https://github.com/saldes-education/jensen-nvt26.git
+Cloning into 'jensen-nvt26'...
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 9 (delta 0), reused 9 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (9/9), 2.24 MiB | 3.76 MiB/s, done.
+mattias-n@mattias-n-ASUS-EXPERTBOOK-B1403CVA:~/Documents/GitHub$ 
