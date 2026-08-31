@@ -6,4 +6,4 @@ Detta verkar inte vara p.g.a. fel läge då jag prövade i användarläge, privi
 
 # Vecka 2  
 Onsdag - Läste fram till kapitel 2.3 samt tog anteckningar  
-Torsdag - Gjorde Python övning oui.py.  Uppdaterade filstruktur i GitHub repo för att bättre matcha utseendet visat i boken.
+Torsdag - Läste fram till kapitel 3.1. Gjorde Python övning oui.py.  Uppdaterade filstruktur i GitHub repo för att bättre matcha utseendet visat i boken.
