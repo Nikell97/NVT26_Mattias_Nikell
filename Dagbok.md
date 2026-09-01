@@ -7,3 +7,14 @@ Detta verkar inte vara p.g.a. fel läge då jag prövade i användarläge, privi
 # Vecka 2  
 Onsdag - Läste fram till kapitel 2.3 samt tog anteckningar  
 Torsdag - Läste fram till kapitel 3.1. Gjorde Python övning oui.py.  Uppdaterade filstruktur i GitHub repo för att bättre matcha utseendet visat i boken.
+
+Återblick
+
+Vilka tre lägen finns på en Cisco-switch, och hur ser du i prompten vilket du är i?
+Svar: De tre lägena är användarläge, det du alltid startar i, privilegierat läge, där du har access till mer information och funktioner, och konfigurationsläget, där du kan göra ändringar till switchens konfiguration. Du ser vilket läge du är i baserat på symbolen som följer switchens namn i kommandoraden. Om switchen har namnet SW-Mattias så ser du att du är i användarläge om det står SW-Mattias>, privilegierat läge om det står SW-Mattias#, och konfigurationsläge om det står SW-Mattias(config)#.  
+
+Vad händer med din konfiguration om du stänger av switchen utan att spara, och vilket kommando sparar du med?
+Svar: Om du inte sparat dina ändringar i konfigurationen till startup-config så kommer de att vara borta om du startar om switchen. För att spara dina konfigurationer använder du kommandot copy running-config startup-config, eller write memory, eller wr. Alla dessa tre gör samma sak men är förkortningar för att göra det snabbare att skriva.
+
+Räkna upp de sju OSI-lagren i ordning. Vilket lager arbetar en switch på?
+Svar: 1 Fysiskt, 2 Datalänk, 3 Nätverk, 4 Transport, 5 Session, 6 Presentation, 7 Applikation. Switchen arbetar på lager 2.
