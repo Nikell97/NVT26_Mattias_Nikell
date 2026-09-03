@@ -1,0 +1,7 @@
+ip link show
+ip -4 addr show dev <INTERFACE>
+ip route show default
+resolvectl status
+resolvectl query <NAMN>
+ping -4 -c 4 <GATEWAY-IP>
+ping -4 -c 4 <SERVER-IP>
