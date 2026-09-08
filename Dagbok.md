@@ -24,5 +24,16 @@ Måndag - Läste fram till kapitel 3.4 om subnätmasker och tog anteckningar
 Tisdag - Läste resterande kapitel 3 och testade att sätta statisk ip på en router i packet tracer.  
 Torsdag (under lektion) - Fick två datorer att kunna pinga till varandra mellan två nätverk via router. Först med statisk ip och sedan med konfigureread dhcp för båda nätverken.  
 
+Återblick
+
+Vad är skillnaden mellan running-config och startup-config?
+Svar: running-config är de inställningar och ändringar du gjort sedan senaste sparningen eller start av maskinen medan startup-config är de sparade inställningarna som informerar konfigurationen som gäller vi uppstart av maskinen.
+
+Vilket lager arbetar en switch på, och vilket arbetar en router på?
+Svar: Vanligen arbetar en switch på lager 2, datalänk, medan en router arbetar på lager 3, nätverk.
+
+Din dator vill nå en server i ett annat land. Vilken MAC-adress frågar den efter, och varför?
+Svar: Den frågar efter MAC-adressen till default gateway eftersom all trafik som går utanför det lokala nätet går genom den.
+
 # Vecka 4
 Måndag - Gjorde moduler 1-5 i koans och sker klart python scriptet för subnät.  
