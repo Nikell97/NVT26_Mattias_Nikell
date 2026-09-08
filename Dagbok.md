@@ -23,3 +23,6 @@ Svar: 1 Fysiskt, 2 Datalänk, 3 Nätverk, 4 Transport, 5 Session, 6 Presentation
 Måndag - Läste fram till kapitel 3.4 om subnätmasker och tog anteckningar  
 Tisdag - Läste resterande kapitel 3 och testade att sätta statisk ip på en router i packet tracer.  
 Torsdag (under lektion) - Fick två datorer att kunna pinga till varandra mellan två nätverk via router. Först med statisk ip och sedan med konfigureread dhcp för båda nätverken.  
+
+# Vecka 4
+Måndag - Gjorde moduler 1-5 i koans och sker klart python scriptet för subnät.  
