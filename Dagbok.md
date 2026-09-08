@@ -10,13 +10,13 @@ Torsdag - Läste fram till kapitel 3.1. Gjorde Python övning oui.py.  Uppdatera
 
 Återblick
 
-Vilka tre lägen finns på en Cisco-switch, och hur ser du i prompten vilket du är i?
+Vilka tre lägen finns på en Cisco-switch, och hur ser du i prompten vilket du är i?  
 Svar: De tre lägena är användarläge, det du alltid startar i, privilegierat läge, där du har access till mer information och funktioner, och konfigurationsläget, där du kan göra ändringar till switchens konfiguration. Du ser vilket läge du är i baserat på symbolen som följer switchens namn i kommandoraden. Om switchen har namnet SW-Mattias så ser du att du är i användarläge om det står SW-Mattias>, privilegierat läge om det står SW-Mattias#, och konfigurationsläge om det står SW-Mattias(config)#.  
 
-Vad händer med din konfiguration om du stänger av switchen utan att spara, och vilket kommando sparar du med?
+Vad händer med din konfiguration om du stänger av switchen utan att spara, och vilket kommando sparar du med?  
 Svar: Om du inte sparat dina ändringar i konfigurationen till startup-config så kommer de att vara borta om du startar om switchen. För att spara dina konfigurationer använder du kommandot copy running-config startup-config, eller write memory, eller wr. Alla dessa tre gör samma sak men är förkortningar för att göra det snabbare att skriva.
 
-Räkna upp de sju OSI-lagren i ordning. Vilket lager arbetar en switch på?
+Räkna upp de sju OSI-lagren i ordning. Vilket lager arbetar en switch på?  
 Svar: 1 Fysiskt, 2 Datalänk, 3 Nätverk, 4 Transport, 5 Session, 6 Presentation, 7 Applikation. Switchen arbetar på lager 2.
 
 # Vecka 3
@@ -26,13 +26,13 @@ Torsdag (under lektion) - Fick två datorer att kunna pinga till varandra mellan
 
 Återblick
 
-Vad är skillnaden mellan running-config och startup-config?
+Vad är skillnaden mellan running-config och startup-config?  
 Svar: running-config är de inställningar och ändringar du gjort sedan senaste sparningen eller start av maskinen medan startup-config är de sparade inställningarna som informerar konfigurationen som gäller vi uppstart av maskinen.
 
-Vilket lager arbetar en switch på, och vilket arbetar en router på?
+Vilket lager arbetar en switch på, och vilket arbetar en router på?  
 Svar: Vanligen arbetar en switch på lager 2, datalänk, medan en router arbetar på lager 3, nätverk.
 
-Din dator vill nå en server i ett annat land. Vilken MAC-adress frågar den efter, och varför?
+Din dator vill nå en server i ett annat land. Vilken MAC-adress frågar den efter, och varför?  
 Svar: Den frågar efter MAC-adressen till default gateway eftersom all trafik som går utanför det lokala nätet går genom den.
 
 # Vecka 4
