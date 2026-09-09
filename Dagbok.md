@@ -36,4 +36,6 @@ Din dator vill nå en server i ett annat land. Vilken MAC-adress frågar den eft
 Svar: Den frågar efter MAC-adressen till default gateway eftersom all trafik som går utanför det lokala nätet går genom den.
 
 # Vecka 4
-Måndag - Gjorde moduler 1-5 i koans och sker klart python scriptet för subnät.  
+Måndag - Gjorde moduler 1-5 i koans och skrivit klart python scriptet för subnät.   
+Tisdag - Gjorde moduler 6-7 i koans och läste fram till kapitel 4.5.1 i boken.  
+Ondsdag - Har testat konfiguration av VLAN i Cisco switch i Packet Tracer.  
