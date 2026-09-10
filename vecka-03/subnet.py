@@ -1,6 +1,8 @@
 import ipaddress
 
-text = "192.168.1.0/26"
+# text = "192.168.1.64/26"
+print("Please enter ip address, ex. 192.168.1.64/26: ")
+text = input()
 
 net = ipaddress.ip_network(text, strict=False)
 
