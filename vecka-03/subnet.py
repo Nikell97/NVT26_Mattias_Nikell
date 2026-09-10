@@ -1,6 +1,6 @@
 import ipaddress
 
-text = "192.168.1.64/26"
+text = "192.168.1.0/26"
 
 net = ipaddress.ip_network(text, strict=False)
 
