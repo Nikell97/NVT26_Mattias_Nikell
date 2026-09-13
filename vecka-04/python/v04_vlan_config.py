@@ -5,10 +5,8 @@ def vlan_config(number, name):
     return rader
 
 vlans = {
-    10: "KONTOR",
-    20: "EKONOMI",
-    30: "GAST",
-    99: "DRIFT",
+    number: f"NAT{number:02d}"
+    for number in range(1, 41)
 }
 
 for number in vlans:
