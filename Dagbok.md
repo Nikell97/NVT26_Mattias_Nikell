@@ -24,6 +24,10 @@ Måndag - Läste fram till kapitel 3.4 om subnätmasker och tog anteckningar
 Tisdag - Läste resterande kapitel 3 och testade att sätta statisk ip på en router i packet tracer.  
 Torsdag (under lektion) - Fick två datorer att kunna pinga till varandra mellan två nätverk via router. Först med statisk ip och sedan med konfigureread dhcp för båda nätverken.  
 
+Observation under labb steg 6 och 7:  
+6 - Efter att nätmasken var satt till 255.255.255.0 så gick det fortfarande att nå default gateway. Jag antar att detta är för att med ip 192.168.1.66/24 så anser datorn att den och default gateway 192.168.1.65 ligger i samma nätverk.
+7 - Efter att default gateway var borttagen så går det fortfarande att nå lokala adresser men den når inte ut på internet. 
+
 Återblick
 
 Vad är skillnaden mellan running-config och startup-config?  
