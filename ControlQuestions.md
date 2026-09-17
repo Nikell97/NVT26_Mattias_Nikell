@@ -146,10 +146,18 @@ talas om nätmask, där du förklarar varför två datorer med samma adressbörj
 
 # Kapitel 4
 4.1 [typ 1 • Kontrollfråga] Vad är skillnaden mellan ett VLAN och ett IP-nät?
+Svar: Ett VLAN ligger på lager 2 och handlar om vilka portar som hör ihop. IP-nät ligger på lager 3 och handlar om adresser. De följs nästan alltid åt men är två skilda saker.
+
 4.2 [typ 1 • Kontrollfråga] Vad skiljer en access-port från en trunk?
+Svar: En access-punkt tillhör bara ett VLAN, och där sitter en dator. En trunk bär flera VLAN samtidigt, och där sitter andra switchar eller router.
+
 4.3 [typ 1 • Kontrollfråga] Vilka två rader behövs för att lägga en port i ett VLAN, och
 varför räcker inte den ena?
+Svar: switchport mode access och switchport access vlan <nummer>. Utan den första står porten kvar i sitt automatiska läge och kan välja något annat än du tänkt.
+
 4.4 [typ 1 • Kontrollfråga] Vad gör taggningen, och var i nätet finns taggen?
+Svar: Taggningen skriver VLAN-nummret i ramen. Taggen lever bara på trunkar, mellan switchar, och till router. Den sätts där när ramen går in i trunk och tas bort när den går ut på access-port.
+
 4.5 [typ 1 • Kontrollfråga] Varför ska en trunk aldrig kopplas till en dator?
 4.6 [typ 1 • Kontrollfråga] Vad är native VLAN, och vad är standardvärdet?
 4.7 [typ 1 • Kontrollfråga] Vad går fel om två switchar har olika native VLAN?
