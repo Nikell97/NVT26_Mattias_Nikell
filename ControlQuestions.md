@@ -5,7 +5,6 @@ när nätverket är nere?
 1.3 [typ 1 • Kontrollfråga] Vilket kommando tar dig från användarläge till privilegierat
 läge?
 1.4 [typ 1 • Kontrollfråga] Vad är skillnaden mellan running-config och startup-config?
-22
 Sladden, prompten och lådorna
 1.5 [typ 1 • Kontrollfråga] Vad händer med en osparad ändring vid ett strömavbrott?
 1.6 [typ 1 • Kontrollfråga] Räkna upp de sju OSI-lagren i ordning.
