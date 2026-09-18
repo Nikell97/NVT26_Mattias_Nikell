@@ -176,7 +176,7 @@ Svar: Att STP stängt porten avsiktligt. Du ska inte göra någonting åt det, p
 
 4.10 [typ 1 • Kontrollfråga] Vad händer om du kör switchport trunk allowed
 vlan två gånger med olika nummer?
-Svar: Den andra listan skriver över den första. Du får bara de VLAN du skrev sist. Om du vill lägga till VLAN måste du skriva switchport allowed vlan add <vlansnummer>.
+Svar: Den andra listan skriver över den första. Du får bara de VLAN du skrev sist. Om du vill lägga till VLAN måste du skriva switchport trunk allowed vlan add <vlansnummer>.
 
 4.11 [typ 1 • Kontrollfråga] Skriv den engelska termen för vart och ett av följande: accessport, trunk, taggning, native VLAN och root bridge. Provet frågar efter dem.
 Svar: Access port, trunk, tagging, native VLAN, och root bridge.
@@ -205,6 +205,8 @@ Gi0/24 10,30,99
 SW-Nordvik-2# show interfaces trunk
 Port Vlans allowed on trunk
 Gi0/24 10,20,30,99
+Svar: SW-Nordvik-1 tillåter inte trafik från VLAN 20 över trunken. För att trafiken för ett VLAN ska gå mellan switcharna måste trunken vara konfigureread på bägge switchar.
+
 4.15 [typ 3 • Läs utdatan] Här är ett utdrag från en switch. En dator i port Gi0/5 får ingen
 adress från DHCP-servern, som sitter i VLAN 10. Vad frågar du efter härnäst?SW-Nordvik-1# show vlan brief
 VLAN Name Status Ports
@@ -215,20 +217,60 @@ VLAN Name Status Ports
 10 KONTOR active Gi0/7,
 ,→ Gi0/8
 20 EKONOMI active Gi0/9
+Svar: Fråga vilket VLAN porten ligger i. G0/5 står under VLAN 1, inte under VLAN 10 där DHCP-servern finns.
+
+Resonemanget: felet ser ut som ett DHCP-problem och är ett VLAN-problem. Datorn skickar sin fråga, men den når aldrig servern eftersom de ligger i olika nät. Det är samma sorts fel som i kapitel 2:s övning 2.11, med ett nytt symptom. Kontrollera också att du står på rätt switch — en port som har förhandlat fram en trunk syns inte alls i show vlan brief.
+
 4.16 [typ 4 • Konfigurationsövning] Skriv den fullständiga konfigurationen för trunken
 mellan SW-Nordvik-1 och SW-Nordvik-2. Den ska bära VLAN 10, 20, 30 och 99, ha
 native VLAN 999 och inte förhandla om läget. Skriv varje rad, i rätt ordning, från
 configure terminal till end.
+Svar: 
+configure terminal
+interface GigabitEthernet 0/24
+switchport trunk encapsulation dot1q
+switchport mode trunk 
+switchport trunk native vlan 999
+switchport trunk allowed vlan 10,20,30,99
+switchport nonegotiate
+end // repetera på anda sidans switch
+Resonemanget: encapsulation måste komma före mode trunk på 3560 och
+3750. nonegotiate är raden som gör att porten inte förhandlar — utan den
+kan grannen dra in porten i ett läge du inte valt. Samma sju rader skrivs på båda
+switcharna.
+
 4.17 [typ 4 • Konfigurationsövning] Port Gi0/11 till Gi0/14 på SW-Nordvik-1 ska läggas i
 VLAN 20 och slippa vänta på STP när en dator kopplas in. Skriv konfigurationen
 med så få rader som möjligt.
+Svar: 
+configure terminal
+interface range GigabitEthernet0/11-14
+switchport mode access
+switchport access vlan 20
+spanning-tree portfast
+
+Resonemanget: interface range gör fyra portar på en gång, och mellanslagen
+runt bindestrecket är obligatoriska. portfast sätts aldrig på en port som går till
+en annan switch — då tar du bort skyddet mot slingor.
+
+
 4.18 [typ 5 • Översätt kravet] Nordviks gäster ska kunna nå internet men ingenting annat i
 huset. Ekonomiavdelningen ska ha ett eget nät som varken kontoret eller gästerna
 når. Driftpersonalen ska kunna nå switcharna från sitt eget nät. Skriv den VLANkonfiguration switchen behöver, och säg vilken del av kravet du inte kan lösa med
 VLAN ensamt.
+Svar: Tre VLAN behövs: gäst, ekonomi och drift. Konfigurationen skapar dem, sätter access-portarna och lägger alla på trunken. Det du inte kan lösa med VLAN ensamt är kravet att gästerna ska nå internet. VLAN
+skiljer nät åt — det kopplar inte ihop dem. Att gästerna ska ut kräver routing i kapitel 5, och att de inte ska nå något annat kräver en ACL i kapitel 9.
+
+Resonemanget: det viktigaste i den här uppgiften är att se vad kravet inte går att uppfylla med veckans verktyg. En tekniker som säger “det där löser vi nästa steg” är mer värd än en som bygger något som ser klart ut och inte är det.
+
 4.19 [typ 6 • Förklara för någon annan] Skriv fem meningar till en kollega som aldrig hört
 talas om VLAN, där du förklarar varför två datorer i samma switch ändå inte kan
 nå varandra.
+Svar: En bra förklaring innehåller tre saker: att switchen har inställningar som säger vilka portar som hör ihop, att portar i olika grupper inte når varandra, och att det inte syns utanpå switchen.
+
+Resonemanget: den vanligaste missen är att beskriva VLAN som ett sätt att dela upp
+kabeln. Det är tvärtom: kabeln är oförändrad, det är switchens inställningar som
+ändrats.
 
 # Kapitel 5
 5.1 [typ 1 • Kontrollfråga] Vad gör en router som en switch inte gör?
