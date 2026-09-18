@@ -159,21 +159,44 @@ Svar: switchport mode access och switchport access vlan <nummer>. Utan den förs
 Svar: Taggningen skriver VLAN-nummret i ramen. Taggen lever bara på trunkar, mellan switchar, och till router. Den sätts där när ramen går in i trunk och tas bort när den går ut på access-port.
 
 4.5 [typ 1 • Kontrollfråga] Varför ska en trunk aldrig kopplas till en dator?
+Svar: För att en dator inte förstår taggade ramar. Den kastar dem eller behandlar dem fel, och ingenting fungerar.
+
 4.6 [typ 1 • Kontrollfråga] Vad är native VLAN, och vad är standardvärdet?
+Svar: Det VLAN som går ottaggat över trunken. Standardvärdet är VLAN 1 på alla Cisco switchar.
+
 4.7 [typ 1 • Kontrollfråga] Vad går fel om två switchar har olika native VLAN?
+Svar: Ottaggad trafik från det ena nätet skulle hamna i det andra. Mellan två Cisco-switchar stänger Ciscos spanning-tree av de två inblandade VLAN:en på porten, och loggen fylls med rader om RECV_PVID_ERR. Mot en switch från en annan tillverkare finns ingen sådan spärr, och då hoppar trafiken mellan näten tyst.
+
 4.8 [typ 1 • Kontrollfråga] Vad förhindrar STP, och hur gör den det?
+Svar: STP (Spanning-Tree-Protocol) förhindrar att ramar går runt i cirkel för evigt. Den gör det genom att stänga av de portar som skulle skapa cirkeln, och öppna dem igen om den öppna vägen går sönder.
+
 4.9 [typ 1 • Kontrollfråga] Vad betyder BLK i show spanning-tree, och vad ska du
 göra åt det?
+Svar: Att STP stängt porten avsiktligt. Du ska inte göra någonting åt det, porten är en reserv, och att dra ur kabeln är ett säkert sätt att ta ner nätet.
+
 4.10 [typ 1 • Kontrollfråga] Vad händer om du kör switchport trunk allowed
 vlan två gånger med olika nummer?
+Svar: Den andra listan skriver över den första. Du får bara de VLAN du skrev sist. Om du vill lägga till VLAN måste du skriva switchport allowed vlan add <vlansnummer>.
+
 4.11 [typ 1 • Kontrollfråga] Skriv den engelska termen för vart och ett av följande: accessport, trunk, taggning, native VLAN och root bridge. Provet frågar efter dem.
+Svar: Access port, trunk, tagging, native VLAN, och root bridge.
+
 4.12 [typ 2 • Räkneövning] Nordviks fyra VLAN delar 192.168.1.0/24 i fyra lika stora
 delar. Räkna ut nätadress, gatewayadress, första och sista användbara adress samt
 broadcastadress för alla fyra. Använd schemat i bilaga C och skriv svaret som en
 tabell.
+Svar: 
+Vlan    Nät             Gateway         Användbara          Broadcast
+10   192.168.1.0/26    192.168.1.1     192.168.1.1-62       192.168.1.63
+20   192.168.1.64/26   192.168.1.65    192.168.1.65-126     192.168.1.127
+30   192.168.1.128/26  192.168.1.129   192.168.1.129-190    192.168.1.191
+99   192.168.1.192/26  192.168.1.193   192.168.1.193-254    192.168.1.225
+
 4.13 [typ 2 • Räkneövning] Ekonomiavdelningen växer till 70 datorer. Räcker /26? Räkna
 ut hur många adresser en /26 ger, hur många av dem som går att använda, och
 vilken mask som skulle behövas i stället.
+Svar: Ett /26 nätverk har 64 adresser, varav 62 är användbara. Det räcker inte för ett nätverk med 70 datorer. Du hade minst behövt ett /25 nätverk med 128 adresser, varav 126 är användbara (inte upptagna av gateway och broadcast)
+
 4.14 [typ 3 • Läs utdatan] Här är ett utdrag från två switchar som är hopkopplade. Datorer
 i VLAN 20 når inte varandra över trunken, men VLAN 10 fungerar. Vad är fel?
 SW-Nordvik-1# show interfaces trunk
