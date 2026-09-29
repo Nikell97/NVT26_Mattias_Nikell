@@ -1,0 +1,179 @@
+# R-Boras-1
+Building configuration...
+
+Current configuration : 1028 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname R-Boras-1
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+license udi pid CISCO2911/K9 sn FTX1524PDS9-
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0.40
+ description Lager
+ encapsulation dot1Q 40
+ ip address 192.168.2.1 255.255.255.192
+!
+interface GigabitEthernet0/0.99
+ description Drift
+ encapsulation dot1Q 99
+ ip address 192.168.2.193 255.255.255.192
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/2
+ description Lank mot Goteborg
+ ip address 10.0.0.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 192.168.1.0 255.255.255.0 10.0.0.1 
+!
+ip flow-export version 9
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+ transport input ssh
+!
+!
+!
+end
+
+# SW-Boras-1
+
+Building configuration...
+
+Current configuration : 1303 bytes
+!
+version 12.2(37)SE1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname SW-Boras-1
+!
+!
+no profinet
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+interface FastEthernet0/1
+!
+interface FastEthernet0/2
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+ switchport access vlan 40
+ switchport mode access
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+ switchport trunk allowed vlan 40,99
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+!
+ip flow-export version 9
+!
+
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+!
+end
+
+
+

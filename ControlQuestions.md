@@ -18,6 +18,7 @@
 1.9 [typ 1 • Kontrollfråga] Nämn två saker show version berättar om en okänd enhet.
 
 1.10 [typ 1 • Kontrollfråga] Vilken hastighet ska den seriella porten ha, och vad ser du om den är fel?
+
 1.11 [typ 3 • Läs utdatan] Här är ett utdrag ur show interfaces status. En av portarna har kabel i men kommer ändå inte upp, och orsaken är inte kabeln. Vilken port, och vilket kommando skulle du köra härnäst?
 
 Port Name Status Vlan
