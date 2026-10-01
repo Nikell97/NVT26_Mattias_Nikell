@@ -305,28 +305,32 @@ kabeln. Det är tvärtom: kabeln är oförändrad, det är switchens inställnin
 
 # Kapitel 5
 5.1 [typ 1 • Kontrollfråga] Vad gör en router som en switch inte gör?
+
 5.2 [typ 1 • Kontrollfråga] Vad betyder bokstaven C respektive S i routingtabellen?
+
 5.3 [typ 1 • Kontrollfråga] Varför får du två rader när du sätter en adress på ett interface?
-5.4 [typ 1 • Kontrollfråga] Vad betyder longest prefix match, och vilken rad vinner om två
-passar?
+5.4 [typ 1 • Kontrollfråga] Vad betyder longest prefix match, och vilken rad vinner om två passar?
+
 5.5 [typ 1 • Kontrollfråga] Varför är 0.0.0.0/0 alltid den sista utvägen?
-5.6 [typ 1 • Kontrollfråga] Vad är ett sub-interface, och varför behövs de på en router med
-få portar?
-5.7 [typ 1 • Kontrollfråga] Vilken rad måste komma före adressen på ett sub-interface, och
-varför?
+
+5.6 [typ 1 • Kontrollfråga] Vad är ett sub-interface, och varför behövs de på en router med få portar?
+
+5.7 [typ 1 • Kontrollfråga] Vilken rad måste komma före adressen på ett sub-interface, och varför?
+
 5.8 [typ 1 • Kontrollfråga] En ping ger inget svar. Vilka två saker kan ha gått fel?
+
 5.9 [typ 1 • Kontrollfråga] Vad är en blackhole-rutt, och varför är den svår att hitta?
+
 5.10 [typ 1 • Kontrollfråga] Vad visar traceroute som ping inte visar?
-5.11 [typ 1 • Kontrollfråga] Skriv den engelska termen för vart och ett av följande: routingtabell, ansluten rutt, statisk rutt, nästa hopp och sub-interface. Provet frågar efter
-dem.
-5.12 [typ 2 • Räkneövning] Länken mellan Göteborg och Borås är 10.0.0.0/30. Hur
-många adresser innehåller nätet, hur många av dem går att sätta på ett interface,
-och vilka är de? Räkna, skriv inte av.
-5.13 [typ 2 • Räkneövning] En kollega föreslår 10.0.0.0/24 till länken i stället. Räkna
-ut hur många adresser som då står oanvända, och skriv en mening om varför det
-ändå kan vara ett rimligt val i ett stort nät.
-5.14 [typ 3 • Läs utdatan] Här är en routingtabell. Ett paket ska till 192.168.2.50.
-Vilken rad används, och vad händer med paketet?
+
+5.11 [typ 1 • Kontrollfråga] Skriv den engelska termen för vart och ett av följande: routingtabell ansluten rutt, statisk rutt, nästa hopp och sub-interface. Provet frågar efter dem.
+
+5.12 [typ 2 • Räkneövning] Länken mellan Göteborg och Borås är 10.0.0.0/30. Hur många adresser innehåller nätet, hur många av dem går att sätta på ett interface, och vilka är de? Räkna, skriv inte av.
+
+5.13 [typ 2 • Räkneövning] En kollega föreslår 10.0.0.0/24 till länken i stället. Räkna ut hur många adresser som då står oanvända, och skriv en mening om varför det ändå kan vara ett rimligt val i ett stort nät.
+
+5.14 [typ 3 • Läs utdatan] Här är en routingtabell. Ett paket ska till 192.168.2.50. Vilken rad används, och vad händer med paketet?
+
 Gateway of last resort is 203.0.113.1 to network 0.0.0.0
 S* 0.0.0.0/0 [1/0] via 203.0.113.1
 S 192.168.2.0/24 [1/0] via 10.0.0.2
@@ -334,22 +338,142 @@ C 192.168.1.0/26 is directly connected,
 ,→ GigabitEthernet0/0.10
 C 10.0.0.0/30 is directly connected,
 ,→ GigabitEthernet0/2
-5.15 [typ 3 • Läs utdatan] Här är ett utdrag från Nordviks router. Datorer i VLAN 20 når
-varandra men inte sin gateway. Vad är fel?
+
+5.15 [typ 3 • Läs utdatan] Här är ett utdrag från Nordviks router. Datorer i VLAN 20 når varandra men inte sin gateway. Vad är fel?
+
 R-Nordvik-1# show running-config interface
 ,→ GigabitEthernet0/0.20
 interface GigabitEthernet0/0.20
 encapsulation dot1Q 21
 ip address 192.168.1.65 255.255.255.192
-5.16 [typ 4 • Konfigurationsövning] Skriv den fullständiga konfigurationen för sub-interfacet
-mot VLAN 30 på R-Nordvik-1: rätt namn, rätt VLAN, rätt adress och rätt mask
-enligt bilaga G. Skriv raderna i den ordning routern kräver.
-5.17 [typ 4 • Konfigurationsövning] Skriv de två rutter som behövs för att Göteborg och
-Borås ska nå varandra — en på varje router. Ange på vilken router varje rad ska
-skrivas.
-5.18 [typ 5 • Översätt kravet] Nordviks ekonomiavdelning ska kunna nå filservern i kontorsnätet. Kontorspersonalen ska inte kunna nå ekonominätet. Driftpersonalen
-ska nå bägge. Beskriv vad du kan lösa med routing den här veckan, och vad som
-måste vänta till kapitel 9. Skriv den konfiguration du faktiskt kan göra nu.
-5.19 [typ 6 • Förklara för någon annan] Skriv fem meningar till en kollega som aldrig hört
-talas om routing, där du förklarar varför en ping kan gå fram utan att komma
-tillbaka.
+
+5.16 [typ 4 • Konfigurationsövning] Skriv den fullständiga konfigurationen för sub-interfacet mot VLAN 30 på R-Nordvik-1: rätt namn, rätt VLAN, rätt adress och rätt mask enligt bilaga G. Skriv raderna i den ordning routern kräver.
+
+5.17 [typ 4 • Konfigurationsövning] Skriv de två rutter som behövs för att Göteborg och Borås ska nå varandra — en på varje router. Ange på vilken router varje rad ska skrivas.
+
+5.18 [typ 5 • Översätt kravet] Nordviks ekonomiavdelning ska kunna nå filservern i kontorsnätet. 
+Kontorspersonalen ska inte kunna nå ekonominätet. Driftpersonalen ska nå bägge. Beskriv vad du kan lösa med routing den här veckan, och vad som måste vänta till kapitel 9. Skriv den konfiguration du faktiskt kan göra nu.
+
+5.19 [typ 6 • Förklara för någon annan] Skriv fem meningar till en kollega som aldrig hört talas om routing, där du förklarar varför en ping kan gå fram utan att komma tillbaka.
+
+# Kapitel 6
+
+6.1 [typ 1 • Kontrollfråga] Ge två olika skäl till att NAT behövs.
+
+6.2 [typ 1 • Kontrollfråga] Vad betyder inside respektive outside, och sitter märkningen på nätet eller på interfacet?
+
+6.3 [typ 1 • Kontrollfråga] Vad skiljer Inside local från Inside global?
+
+6.4 [typ 1 • Kontrollfråga] Vad gör PAT som statisk NAT inte gör?
+
+6.5 [typ 1 • Kontrollfråga] Varför fungerar inte en förbindelse som börjar utifrån, utan särskild konfiguration? 
+
+6.6 [typ 1 • Kontrollfråga] Vilket ord i NAT-kommandot gör det till PAT?
+
+6.7 [typ 1 • Kontrollfråga] Varför är NAT ingen säkerhetsfunktion?
+
+6.8 [typ 1 • Kontrollfråga] Vilka två saker måste finnas på enheten innan crypto key generate rsa fungerar?
+
+6.9 [typ 1 • Kontrollfråga] Vilken rad stänger dörren för telnet?
+
+6.10 [typ 1 • Kontrollfråga] Nämn tre saker som ska bort ur en konfigurationsfil innan du committar den.
+
+6.11 [typ 1 • Kontrollfråga] Skriv den engelska termen för vart och ett av följande: över-sättning, insida, utsida och sanering. Provet frågar efter dem.
+
+6.12 [typ 2 • Räkneövning] Listan access-list 1 permit 192.168.1.0
+0.0.0.255 släpper ut alla fyra VLAN på en gång. Skriv i stället fyra ra-
+der, en per VLAN, med rätt wildcard-mask för en /26. Räkna fram masken, skriv
+inte av.
+
+6.13 [typ 2 • Räkneövning] Nordvik har 70 datorer på insidan och en offentlig adress. Varje dator har i snitt tolv samtidiga förbindelser. Hur många rader står det då i show ip nat translations? Räcker portnumren?
+
+6.14 [typ 3 • Läs utdatan] Här är en NAT-tabell. Hur många enheter på insidan syns i utdatan, och hur många offentliga adresser använder de?
+
+Pro Inside global Inside local Outside
+↪→ local Outside global
+tcp 203.0.113.10:1024 192.168.1.42:52814
+↪→ 198.51.100.34:80 198.51.100.34:80
+tcp 203.0.113.10:1025 192.168.1.42:52815
+↪→ 198.51.100.34:443 198.51.100.34:443
+tcp 203.0.113.10:1026 192.168.1.51:61200
+↪→ 198.51.100.34:80 198.51.100.34:80
+
+6.15 [typ 3 • Läs utdatan] Här är ett utdrag från en router där ingenting kommer ut på internet. Vad är fel?
+
+R-Nordvik-1# show ip nat statistics
+Total active translations: 0 (0 static, 0 dynamic; 0
+↪→ extended)
+Outside interfaces:
+GigabitEthernet0/0.10
+Inside interfaces:
+GigabitEthernet0/1
+Hits: 0 Misses: 0
+Expired translations: 0
+Dynamic mappings:
+
+6.16 [typ 4 • Konfigurationsövning] Skriv den fullständiga konfigurationen som ger gästnätet, och bara gästnätet, en väg ut via PAT. Alla andra nät ska lämnas orörda.
+
+6.17 [typ 4 • Konfigurationsövning] Skriv de rader som krävs för att slå på SSH på en router som just startats med tom konfiguration. Ta med allt som behövs, i rätt ordning. Skriv <losenord> där ett lösenord ska stå — aldrig ett riktigt.
+
+6.18 [typ 5 • Översätt kravet] Nordvik har köpt upp ett företag som använder samma adressrymd som Nordvik själva. Ledningen vill att ekonomiavdelningarna på de två kontoren ska kunna nå varandras filservrar, men inget annat ska kopplas ihop. Beskriv vad du gör, i vilken ordning, och vad du behöver komma överens om med den andra sidans tekniker innan du rör något.
+
+6.19 [typ 6 • Förklara för någon annan] Skriv fem meningar till en kollega som aldrig hört talas om NAT, där du förklarar hur sjuttio datorer kan dela på en enda adress.
+
+# Kapitel 7
+7.1 [typ 1 • Kontrollfråga] Vad är en baseline, och varför måste den mätas innan felet?
+
+7.2 [typ 1 • Kontrollfråga] Varför räcker det inte att veta att det går 40 megabit just nu?
+
+7.3 [typ 1 • Kontrollfråga] Vilka fyra delar består en loggrad av?
+
+7.4 [typ 1 • Kontrollfråga] Vilken loggnivå är allvarligast, 0 eller 7?
+
+7.5 [typ 1 • Kontrollfråga] Vad händer med enhetens logg vid en omstart, och vad gör du åt det?
+
+7.6 [typ 1 • Kontrollfråga] Vad frågar SNMP efter som syslog inte svarar på?
+
+7.7 [typ 1 • Kontrollfråga] Vilka tre frågor ställer du till en graf, i vilken ordning?
+
+7.8 [typ 1 • Kontrollfråga] Nämn två visningsfilter i Wireshark och vad de visar.
+
+7.9 [typ 1 • Kontrollfråga] Vad är skillnaden mellan ett visningsfilter och ett capture-filter?
+
+7.10 [typ 1 • Kontrollfråga] Varför står lösenordet inte i Python-skriptet?
+
+7.11 [typ 1 • Kontrollfråga] Skriv den engelska termen för vart och ett av följande: avvikelse, loggnivå och visningsfilter. Provet frågar efter dem.
+
+7.12 [typ 2 • Räkneövning] Loggen visar tre portflappar: 02:14:03.112–02:14:09.887,
+
+02:31:44.201–02:31:51.664 och 03:02:18.339–03:02:25.005. Räkna ut hur länge varje avbrott varade, hur lång tid som gick mellan det första och det sista, och hur stor andel av den tiden porten var nere.
+
+7.13 [typ 2 • Räkneövning] Nordviks förbindelse ut är 100 Mbit/s. Grafen visar i snitt 38 Mbit/s under ett femminutersintervall. Räkna ut hur många gigabyte som passerade under de fem minuterna, och förklara varför siffran inte säger något om huruvida någon fick vänta.
+
+7.14 [typ 3 • Läs utdatan] Här är ett utdrag ur en logg. Vad hände, hur länge varade det, och varför skulle du inte hitta det med show interfaces status?
+
+Oct 13 02:14:03.112: %LINK-3-UPDOWN: Interface
+↪→ GigabitEthernet0/3, changed state to down
+Oct 13 02:14:09.887: %LINK-3-UPDOWN: Interface
+↪→ GigabitEthernet0/3, changed state to up
+Oct 13 02:31:44.201: %LINK-3-UPDOWN: Interface
+↪→ GigabitEthernet0/3, changed state to down
+Oct 13 02:31:51.664: %LINK-3-UPDOWN: Interface
+↪→ GigabitEthernet0/3, changed state to up
+Oct 13 03:02:18.339: %LINK-3-UPDOWN: Interface
+↪→ GigabitEthernet0/3, changed state to down
+Oct 13 03:02:25.005: %LINK-3-UPDOWN: Interface
+↪→ GigabitEthernet0/3, changed state to up
+
+7.15 [typ 3 • Läs utdatan] Här är ett utdrag från en enhet där loggen verkar tom. Vad är förklaringen, och vilken rad avslöjar den?
+
+R-Nordvik-1# show version
+Cisco IOS Software, C2951 Software, Version 15.1(4)M4
+R-Nordvik-1 uptime is 11 minutes
+System returned to ROM by power-on
+
+7.16 [typ 4 • Konfigurationsövning] Skriv de rader som krävs för att en router ska tids-stämpla loggen med millisekunder, spara 16 kB logg i minnet, hämta tid från 192.168.1.16 och skicka nivå 0 till 5 till loggservern 192.168.1.17.
+
+7.17 [typ 4 • Konfigurationsövning] En kollega har satt logging trap 7 i drift och loggser-vern fylls. Skriv den enda rad som rättar det, och skriv i en mening vad som slutar synas.
+
+7.18 [typ 5 • Översätt kravet] Nordviks ledning vill få ett meddelande när förbindelsen mot internet är onormalt belastad, men inte varje gång någon laddar ner en stor fil. Beskriv vad du behöver mäta, under hur lång tid, och vilken gräns du skulle sätta. Motivera varför just den gränsen, och vad du gör om larmen ändå kommer för ofta.
+
+7.19 [typ 6 • Förklara för någon annan] Skriv fem meningar till en kollega som aldrig hört talas om baseline, där du förklarar varför ett mätvärde utan historik är värdelöst.
