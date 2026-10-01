@@ -1,18 +1,38 @@
 # Kapitel 1
 1.1 [typ 1 • Kontrollfråga] Varför går det att komma in på en switch över konsolen även
 när nätverket är nere?
+Svar: Konsolen är end direktkoppling mellan datorn och enheten så det behövs ingen nätverkskonfiguration och/eller IP-adress för det att fungera (Lager 1).
+
 1.2 [typ 1 • Kontrollfråga] Vilka tre lägen finns, och hur ser du i prompten vilket du är i?
+Svar: Användarläge, Hostname>, Privilegierat läge, Hostname#, Konfigurationsläge, Hostname(config)#.
+
 1.3 [typ 1 • Kontrollfråga] Vilket kommando tar dig från användarläge till privilegierat
 läge?
+Svar: enable
+
 1.4 [typ 1 • Kontrollfråga] Vad är skillnaden mellan running-config och startup-config?
 Sladden, prompten och lådorna
+Svar: Running-config är intällningarna du har i det nuvarande sessionet, startup-config är de inställningar enheten startar med vid nästa session. Om du vill spara de ändringar du gjort måste du skriva running-config till startup-config genom kommando copy running-config startup-config, write memory, eller wr.
+
 1.5 [typ 1 • Kontrollfråga] Vad händer med en osparad ändring vid ett strömavbrott?
+Svar: De försvinner. Osparade ändringar i running-config måste sparas annars kommer de slängas vid slutet av sessionet vare sig du loggar ut självmant eller får strömavbrott.
+
 1.6 [typ 1 • Kontrollfråga] Räkna upp de sju OSI-lagren i ordning.
+Svar: 1 Fysiskt, 2 Datalänk, 3 Nätverk, 4 Transport, 5 Session, 6 Presentation, 7 Applikation
+
 1.7 [typ 1 • Kontrollfråga] Vilket lager arbetar en switch på? Vilket arbetar en router på?
+Svar: En switch jobbar vanligen på lager 2, datalänk, och en router på lager 3, nätverk. Det finns dock exempel på switchar som också jobbar i lager 3, s.k. lager-tre-switchar.
+
 1.8 [typ 1 • Kontrollfråga] Vad gör en brandvägg som en router inte gör?
+Svar: Brandväggen bestämmer vilken trafik som får passera, inte bara vart den ska. Den håller också reda på pågående anslutningar, och moderna brandväggar tittar ända upp i lager 7.
+
 1.9 [typ 1 • Kontrollfråga] Nämn två saker show version berättar om en okänd enhet.
+Svar: modell, IOS-verison, uptime, serienummer
+
 1.10 [typ 1 • Kontrollfråga] Vilken hastighet ska den seriella porten ha, och vad ser du om
 den är fel?
+Svar: 9600, med 8N1. Är den fel får du antingen ingenting alls på skärmen eller obegripliga tecken.
+
 1.11 [typ 3 • Läs utdatan] Här är ett utdrag ur show interfaces status. En av
 portarna har kabel i men kommer ändå inte upp, och orsaken är inte kabeln. Vilken
 port, och vilket kommando skulle du köra härnäst?
@@ -24,32 +44,44 @@ Gi0/2 notconnect 1
 ,→ auto auto 10/100/1000BaseTX
 Gi0/3 disabled 1
 ,→ auto auto 10/100/1000BaseTX
+
+Svar: Gi0/3 är disabled vilket betyder att porten är avstängd via konfigurationsinställningar. Kör show running-config interface GigabitEthernet0/3 och kolla efter raden shutdown.
+
 1.12 [typ 3 • Läs utdatan] En kurskamrat visar dig det här och säger att switchen “inte
 tar emot kommandon”. Vad har hänt, och vad säger du åt hen att göra?
 Switch> hostname SW-Bertil
 ^
 % Invalid input detected at '^' marker.
+
+Svar: De står i fel läge, för att kunna göra ändringar till inställningar, såsom hostname, måste man vara i konfigurationsläge. Skriv först enable för att gå in i privilegierat läge och sedan configure terminal för att gå in i konfigurationsläge.
+
 1.13 [typ 6 • Förklara för någon annan] Skriv fem meningar till en kollega som aldrig sett
 en switch, där du förklarar skillnaden mellan running-config och startup-config.
 Använd inga engelska termer utom de två namnen.
+Svar: Ändringar i running-config börjar gälla direkt med de skulle inter överleva ett strömavbrott eller vid nästa uppstart utan att man manuellt sparar till startup-config som säger vilka inställningar maskinen ska ha nästa gång du startar om den.
 
 # Kapitel 2
 2.1 [typ 1 • Kontrollfråga] Vad står först i en ram: avsändarens eller mottagarens adress?
+Svar: Mottagarens adress står först. Switchen behöver veta vart ramen ska innan den behöver veta varifrån den kom.
 
-2.2 [typ 1 • Kontrollfråga] Hur många tecken har en MAC-adress, och vad betyder den
-första halvan?
+2.2 [typ 1 • Kontrollfråga] Hur många tecken har en MAC-adress, och vad betyder den första halvan?
+Svar: Tolv tecken, skrivna som 6 par. Den första halvan indikerar vem som är tillverkaren, den andra ett löpnummer. 
 
 2.3 [typ 1 • Kontrollfråga] Var får switchen sina anteckningar ifrån? Vem fyller i tabellen?
+Svar: Ingen fyller i tabellen, switchen fyller automatiskt ut den med information allteftersom att paket skickas mellan enheter i nätverket.
 
-2.4 [typ 1 • Kontrollfråga] Vad gör switchen med en ram vars mottagare den inte känner
-igen?
+2.4 [typ 1 • Kontrollfråga] Vad gör switchen med en ram vars mottagare den inte känner igen?
+Svar: Den gör en s.k. broadcast där den skickar ut ramen genom alla portar utom den port där den kom in på. Svaret som kommer tillbaka från mottagaren lär switchen var mottagaren sitter så switchen kan skicka direkt nästa gång så länge anteckningen sitter kvar.
 
-2.5 [typ 1 • Kontrollfråga] Hur länge sitter en anteckning kvar i MAC-tabellen, och varför
-försvinner den?
+2.5 [typ 1 • Kontrollfråga] Hur länge sitter en anteckning kvar i MAC-tabellen, och varför försvinner den?
+
+Svar: Standarden är att en anteckning i MAC-address table lever kvar ca 5 minuter. Hade den inte försvunnit hade man behövt starta om enheten varje gång någon flyttar på en kabel eller dator, eller så skulle switchen försöka skicka trafik till portar där ingen längre sitter.
 
 2.6 [typ 1 • Kontrollfråga] Vilken adress används vid broadcast, och vad betyder den?
+Svar: FF:FF:FF:FF:FF:FF och den betyder "till allt på det här nätet".
 
 2.7 [typ 1 • Kontrollfråga] Varför går en ARP-fråga till alla, medan svaret går till en?
+Svar: 
 
 2.8 [typ 1 • Kontrollfråga] Din dator vill nå en server i ett annat land. Vilken MAC-adress
 frågar den efter?
