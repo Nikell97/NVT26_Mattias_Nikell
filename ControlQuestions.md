@@ -421,32 +421,43 @@ Dynamic mappings:
 
 # Kapitel 7
 7.1 [typ 1 • Kontrollfråga] Vad är en baseline, och varför måste den mätas innan felet?
+Svar: 
 
 7.2 [typ 1 • Kontrollfråga] Varför räcker det inte att veta att det går 40 megabit just nu?
+Svar:
 
 7.3 [typ 1 • Kontrollfråga] Vilka fyra delar består en loggrad av?
+Svar:
 
 7.4 [typ 1 • Kontrollfråga] Vilken loggnivå är allvarligast, 0 eller 7?
+Svar:
 
 7.5 [typ 1 • Kontrollfråga] Vad händer med enhetens logg vid en omstart, och vad gör du åt det?
+Svar:
 
 7.6 [typ 1 • Kontrollfråga] Vad frågar SNMP efter som syslog inte svarar på?
+Svar:
 
 7.7 [typ 1 • Kontrollfråga] Vilka tre frågor ställer du till en graf, i vilken ordning?
+Svar:
 
 7.8 [typ 1 • Kontrollfråga] Nämn två visningsfilter i Wireshark och vad de visar.
+Svar:
 
 7.9 [typ 1 • Kontrollfråga] Vad är skillnaden mellan ett visningsfilter och ett capture-filter?
+Svar:
 
 7.10 [typ 1 • Kontrollfråga] Varför står lösenordet inte i Python-skriptet?
+Svar:
 
 7.11 [typ 1 • Kontrollfråga] Skriv den engelska termen för vart och ett av följande: avvikelse, loggnivå och visningsfilter. Provet frågar efter dem.
+Svar:
 
-7.12 [typ 2 • Räkneövning] Loggen visar tre portflappar: 02:14:03.112–02:14:09.887,
-
-02:31:44.201–02:31:51.664 och 03:02:18.339–03:02:25.005. Räkna ut hur länge varje avbrott varade, hur lång tid som gick mellan det första och det sista, och hur stor andel av den tiden porten var nere.
+7.12 [typ 2 • Räkneövning] Loggen visar tre portflappar: 02:14:03.112–02:14:09.887, 02:31:44.201–02:31:51.664 och 03:02:18.339–03:02:25.005. Räkna ut hur länge varje avbrott varade, hur lång tid som gick mellan det första och det sista, och hur stor andel av den tiden porten var nere.
+Svar:
 
 7.13 [typ 2 • Räkneövning] Nordviks förbindelse ut är 100 Mbit/s. Grafen visar i snitt 38 Mbit/s under ett femminutersintervall. Räkna ut hur många gigabyte som passerade under de fem minuterna, och förklara varför siffran inte säger något om huruvida någon fick vänta.
+Svar:
 
 7.14 [typ 3 • Läs utdatan] Här är ett utdrag ur en logg. Vad hände, hur länge varade det, och varför skulle du inte hitta det med show interfaces status?
 
@@ -463,6 +474,8 @@ Oct 13 03:02:18.339: %LINK-3-UPDOWN: Interface
 Oct 13 03:02:25.005: %LINK-3-UPDOWN: Interface
 ↪→ GigabitEthernet0/3, changed state to up
 
+Svar:
+
 7.15 [typ 3 • Läs utdatan] Här är ett utdrag från en enhet där loggen verkar tom. Vad är förklaringen, och vilken rad avslöjar den?
 
 R-Nordvik-1# show version
@@ -470,10 +483,16 @@ Cisco IOS Software, C2951 Software, Version 15.1(4)M4
 R-Nordvik-1 uptime is 11 minutes
 System returned to ROM by power-on
 
+Svar:
+
 7.16 [typ 4 • Konfigurationsövning] Skriv de rader som krävs för att en router ska tids-stämpla loggen med millisekunder, spara 16 kB logg i minnet, hämta tid från 192.168.1.16 och skicka nivå 0 till 5 till loggservern 192.168.1.17.
+Svar:
 
 7.17 [typ 4 • Konfigurationsövning] En kollega har satt logging trap 7 i drift och loggser-vern fylls. Skriv den enda rad som rättar det, och skriv i en mening vad som slutar synas.
+Svar:
 
 7.18 [typ 5 • Översätt kravet] Nordviks ledning vill få ett meddelande när förbindelsen mot internet är onormalt belastad, men inte varje gång någon laddar ner en stor fil. Beskriv vad du behöver mäta, under hur lång tid, och vilken gräns du skulle sätta. Motivera varför just den gränsen, och vad du gör om larmen ändå kommer för ofta.
+Svar:
 
 7.19 [typ 6 • Förklara för någon annan] Skriv fem meningar till en kollega som aldrig hört talas om baseline, där du förklarar varför ett mätvärde utan historik är värdelöst.
+Svar:
