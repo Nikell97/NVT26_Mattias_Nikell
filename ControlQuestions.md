@@ -81,14 +81,17 @@ Svar: Standarden är att en anteckning i MAC-address table lever kvar ca 5 minut
 Svar: FF:FF:FF:FF:FF:FF och den betyder "till allt på det här nätet".
 
 2.7 [typ 1 • Kontrollfråga] Varför går en ARP-fråga till alla, medan svaret går till en?
-Svar: 
+Svar: Frågan går till alla eftersom användaren inte vet vem som ska ha svaret. Svaret kan gå till en, eftersom den som svarar redan sett frågeställarens MAC-adress i ramen som kom in.
 
 2.8 [typ 1 • Kontrollfråga] Din dator vill nå en server i ett annat land. Vilken MAC-adress
 frågar den efter?
+Svar: Datorn frågar efter MAC-adressen till sin default gateway. Den slår aldrig up MAC-adresser till någon utanför det egna nätet.
 
 2.9 [typ 1 • Kontrollfråga] Vad betyder DYNAMIC respektive STATIC i kolumnen Type?
+Svar: DYNAMIC betyder att switchen lärt sig adressen själv. STATIC betyder att någon skrivit in den, eller att adressen tillhör switchen.
 
 2.10 [typ 1 • Kontrollfråga] Nämn två saker som gör att en port visar notconnect.
+Svar: En kabel kan vara trasig, kabeln sitter i fel port, enheten i andra änden är avstängd, eller porten är avstängd med shutdown.
 
 2.11 [typ 3 • Läs utdatan] Några veckor senare ringer Anna igen. Här är ett utdrag ur
 MAC-tabellen. Hon har adressen a4c3.f011.3ab7 och når ingen alls, trots att
@@ -98,6 +101,13 @@ Vlan Mac Address Type Ports
 1 3cd9.2b77.0142 DYNAMIC Gi0/5
 99 a4c3.f011.3ab7 DYNAMIC Gi0/7
 1 3cd9.2bd2.1188 DYNAMIC Gi0/12
+
+Svar: Annas port ligger i VLAN 99, medan de andra ligger i VLAN 1. 
+Resonemanget: switchen har lärt sig adressen, alltså kom ramen fram till switchen
+och lager 1 fungerar. Kabeln och porten är därmed uteslutna. Att adressen finns
+men trafiken inte går fram betyder att ramen stoppas efter switchen tagit emot den,
+och VLAN är det som gör just det. Det är också ett bra exempel på varför du ska
+läsa alla kolumner i ett utdrag, inte bara den du kom för.
 
 2.12 [typ 3 • Läs utdatan] Här är ett utdrag ur show interfaces status. Tre portar
 har trafik. En av dem kommer att fungera sämre än de andra. Vilken, och vad
@@ -111,44 +121,69 @@ Gi0/2 connected 1 a-
 Gi0/3 connected 1 a-
 ,→ full a-1000 10/100/1000BaseTX
 
+Svar: Port Gi0/2. Den kör a-half och 100 megabit, medan de andra kör a-full och 1000 megabit.
+Resonemanget: bokstaven a framför värdet betyder att switchen förhandlat fram det
+automatiskt. Att förhandlingen landade i halv duplex på en gigabitport betyder nästan alltid att motparten har ett fast värde inställt. Nästa steg är show interfaces Gi0/2 och räknarna. Stiger late collisions har du en duplex mismatch. Kontrollera då inställningen i båda ändarna, inte bara switchens. Saknas a- helt är värdet i stället fast inställt på switchen.
+
 2.13 [typ 6 • Förklara för någon annan] Skriv fem meningar till en kollega som aldrig hört
 talas om en switch, där du förklarar varför switchen skickar en ram till alla portar
 första gången. Använd inga engelska termer utom switch.
 
 # Kapitel 3
 3.1 [typ 1 • Kontrollfråga] Vad säger en IP-adress som en MAC-adress inte säger?
+Svar: Var enheten finns. MAC-adressen säger vem enheten är och ändras aldrig i normalfallet. IP-adressen säger var den bor just nu, och den byts så fort enheten flyttar till ett annat nät.
 
 3.2 [typ 1 • Kontrollfråga] Vad gör nätmasken?
+Svar: Den talar om hur stor del av adressen som är nätet och hur stor del som är enheten. Utan det går det inte att avgöra om två adresser ligger i samma nät.
 
 3.3 [typ 1 • Kontrollfråga] Vilken adress i ett nät får ingen enhet ha, och varför är det två
 stycken?
+Svar: Den första, nätadressen, och den sista, broadcastadressen. Den första är namnet på nätet självt, den sista når alla i nätet. Ingen enhet får ha någon av dem, och därför är antalet enheter alltid två färre an antalet adresser. 
 
 3.4 [typ 1 • Kontrollfråga] Vad är blocksteget för /26, och vad använder du det till?
+Svar: 64. Du använder det för att hitta närmaste nät: räkan 0, 64, 128, 192 tills du passerar din adress, och ta talet före.
 
 3.5 [typ 1 • Kontrollfråga] Varför måste gatewayen ligga i samma nät som du?
+Svar: Hade den legat utanför nätet hade du inte kommit åt gatewayen. För att du bara kan skicka direkt till enheter i ditt eget nät. Ligger gatewayen utanför når du den aldrig, och då hjälper den dig inte.
 
-3.6 [typ 1 • Kontrollfråga] Vad händer med en dator som har rätt adress men ingen
-gateway?
+3.6 [typ 1 • Kontrollfråga] Vad händer med en dator som har rätt adress men ingen gateway?
+Svar: Den fungerar inom det lokala nätverket utan probelm men den kan inte nå utanför det. Skrivaren
+och filservern fungerar, internet gör det inte. Det är därför felet är svårt att hitta.
 
-3.7 [typ 1 • Kontrollfråga] Vilka fyra saker får en dator av DHCP, och vilken av dem säger
-hur länge de gäller?
+3.7 [typ 1 • Kontrollfråga] Vilka fyra saker får en dator av DHCP, och vilken av dem säger hur länge de gäller?
+Svar: IP-adress, nätmask, default gateway, och DNS-server.
 
 3.8 [typ 1 • Kontrollfråga] Vilka enheter ska ha statisk adress, och varför?
+Svar: Routrar, switchar, servrar, och skrivare. Allt som andra ska hitta på en känd adress, och allt du själv måste kunna nå för att felsöka.
 
 3.9 [typ 1 • Kontrollfråga] Hur skiljer du ett DNS-problem från ett DHCP-problem?
+Svar: Kör ping mot en IP-adress och sedan mot ett namn. Fungerar adressen men inte namnet så är det ett DNS problem. Fungerar ingendera så är det något annat, och då börjar du med din egen adress.
 
-3.10 [typ 1 • Kontrollfråga] Vad betyder det att en dator har en adress som börjar på
-169.254?
+3.10 [typ 1 • Kontrollfråga] Vad betyder det att en dator har en adress som börjar på 169.254?
+Svar: Att datorn frågade efter en adress men inte fick något svar. Då hittar den på egen, och den fungerar inte utanför den egna kabeln.
 
-3.11 [typ 2 • Räkneövning] Räkna ut nätadress, broadcast och adressintervall för
-192.168.1.200/26. Visa alla fyra stegen.
+3.11 [typ 2 • Räkneövning] Räkna ut nätadress, broadcast och adressintervall för 192.168.1.200/26. Visa alla fyra stegen.
+Svar: 
+1. Blocksteget för /26 är 64.
+2. 0, 64, 128, 192. Talet 200 ligger efter 192. Nätet är 192.168.1.192.
+3. Nästa nät efter 192 är 256, vilket inte finns i det sista talet. Nätet slutar alltså på 255, och broadcast är 192.168.1.255.
+4. Enheterna är 192.168.1.193 till 192.168.1.254, alltså 62 stycken.
 
-3.12 [typ 2 • Räkneövning] Räkna ut samma sak för 10.0.0.6/30. Hur många enheter
-får plats?
+3.12 [typ 2 • Räkneövning] Räkna ut samma sak för 10.0.0.6/30. Hur många enheter får plats?
+Svar: Blocksteget är 4. Räkna 0, 4, 8. Talet 6 ligger mellan 4 och 8. Nätet är 10.0.0.4,
+broadcast är 10.0.0.7, och enheterna är 10.0.0.5 och 10.0.0.6. Två stycken.
+Resonemanget: två enheter är precis vad en länk mellan två routrar behöver. Det är
+hela skälet till att /30 finns.
 
-3.13 [typ 2 • Räkneövning] Nordviks lager i Borås har fått 192.168.2.0/24 och behöver
-tre nät: lager, trådlöst gäst och drift. Föreslå en uppdelning i /26 och skriv ut nät,
-broadcast och intervall för varje.
+3.13 [typ 2 • Räkneövning] Nordviks lager i Borås har fått 192.168.2.0/24 och behöver tre nät: lager, trådlöst gäst och drift. Föreslå en uppdelning i /26 och skriv ut nät, broadcast och intervall för varje.
+Svar: 
+Vad             Nät                    Broadcast   Enheter
+Lager           192.168.2.0/26          .63         .1–.62
+Trådlöst gäst   192.168.2.64/26         .127        .65–.126
+Drift           192.168.2.192/26        .255        .193–.254
+Resonemanget: tre nät behövdes, fyra blev det. Den fjärde delen, 192.168.2.128/26,
+lämnas ledig. Att spara en fjärdedel till nästa år är billigare än att göra om planen
+när lagret växer. Jämför med bilaga G, där samma uppdelning står färdig.
 
 3.14 [typ 3 • Läs utdatan] Här är ett utdrag från en dator som inte kommer ut på internet,
 men som når filservern på 192.168.1.10. Vad är fel?
@@ -156,6 +191,8 @@ Ethernet-kort Ethernet:
 IPv4-adress . . . . . . . . . . : 192.168.1.42
 Nätmask . . . . . . . . . . . . : 255.255.255.192
 Standardgateway . . . . . . . . : 192.168.1.65
+
+Svar: Gatewayen ligger i fel nät. Datorn har 192.168.1.42 med masken 255.255.255.192, alltså ett /26. Dess nät är 192.168.1.0/26 med adresserna .1 till .62. Gatewayen 192.168.1.65 ligger utanför. Rätt adress är 192.168.1.1.
 
 3.15 [typ 3 • Läs utdatan] Här är ett utdrag från routern. En student säger att DHCP inte
 fungerar, för hens dator får ingen adress. Vad frågar du efter härnäst?
@@ -171,9 +208,10 @@ GigabitEthernet0/1 unassigned YES NVRAM
 GigabitEthernet0/2 unassigned YES NVRAM
 ,→ administratively down down
 
-3.16 [typ 6 • Förklara för någon annan] Skriv fem meningar till en kollega som aldrig hört
-talas om nätmask, där du förklarar varför två datorer med samma adressbörjan
-ändå kan hamna i olika nät.
+Svar: Fråga vilken port datorn sitter i. Bara Gi0/0 är uppe och har adress. De två andra gigabitportarna är administratevly down och saknar adress helt. Sitter studentens dator bakom någon av dem når DHCP-frågan aldrig ett konfigurerat interface, och då får hen ingen adress hur rätt poolen än är.
+Resonemanget: den vanligaste reflexen är att titta på poolen först. Utdatan säger redan att poolen inte är problemet, och den säger det innan du kört ett enda DHCP-kommando. Det är därför show ip interface brief är det första kommandot du kör vid ett adressproblem, inte det sista. Raden Embedded-Service-Engine0/0 är ett internt interface på 2951:an. Den är alltid avstängd om ingen använder den, och den ska du lära dig att läsa förbi.
+
+3.16 [typ 6 • Förklara för någon annan] Skriv fem meningar till en kollega som aldrig hört talas om nätmask, där du förklarar varför två datorer med samma adressbörjan ändå kan hamna i olika nät.
 
 # Kapitel 4
 4.1 [typ 1 • Kontrollfråga] Vad är skillnaden mellan ett VLAN och ett IP-nät?
@@ -305,29 +343,46 @@ kabeln. Det är tvärtom: kabeln är oförändrad, det är switchens inställnin
 
 # Kapitel 5
 5.1 [typ 1 • Kontrollfråga] Vad gör en router som en switch inte gör?
+Svar: Routern flyttar trafik mellan olika nät. Switchen flyttar det inom ett nät. Routern arbetar med IP-adresser, switchen arbetar med MAC-adresser.
 
 5.2 [typ 1 • Kontrollfråga] Vad betyder bokstaven C respektive S i routingtabellen?
+Svar: C betyder att det är en ansluten rutt: routern sitter själv i nätet. S betyder statisk rutt: någon skrev den för hand.
 
 5.3 [typ 1 • Kontrollfråga] Varför får du två rader när du sätter en adress på ett interface?
+Svar: En C-rad för nätet och en L-rad för routerns egen adress i nätet. L-raden har alltid /32 och finns för att routern ska veta vad som är till den själv.
+
 5.4 [typ 1 • Kontrollfråga] Vad betyder longest prefix match, och vilken rad vinner om två passar?
+Svar: Att den mest exakta raden vinner, alltså den med den största siffran efter snedteckent. Passar två rader väljer routern den med längst prefix.
 
 5.5 [typ 1 • Kontrollfråga] Varför är 0.0.0.0/0 alltid den sista utvägen?
+Svar: För att prefixet 0 betyder att ingen del av adressen behöver stämma. Den passar alla adresser och är därför alltid den sämsta träffen.
 
 5.6 [typ 1 • Kontrollfråga] Vad är ett sub-interface, och varför behövs de på en router med få portar?
+Svar: En logisk del av ett fysiskt interface. De behövs för att en router med få portar ska kunna vara gateway för flera VLAN över en enda kabel.
 
 5.7 [typ 1 • Kontrollfråga] Vilken rad måste komma före adressen på ett sub-interface, och varför?
+Svar: encapsulation dot1Q <vlan>. Utan den vet routern inte vilket VLAN interfacet hör till, och den vägrar ta emot adressen.
 
 5.8 [typ 1 • Kontrollfråga] En ping ger inget svar. Vilka två saker kan ha gått fel?
+Svar: Antingen kom paketet aldrig fram, eller så kom svaret aldrig tillbaka. En ping är två resor, och du vet bara att minst en av dem misslyckades.
 
 5.9 [typ 1 • Kontrollfråga] Vad är en blackhole-rutt, och varför är den svår att hitta?
+Svar: En rutt som pekar mot ett nästa hopp som inte finns eller inte vet vägen vidare. Den är svår att hitta eftersom raden ser helt korrekt ut i tabellen — routern kontrollerar aldrig att nästa hopp svarar.
 
 5.10 [typ 1 • Kontrollfråga] Vad visar traceroute som ping inte visar?
+Svar: Var paketet tog slut. ping säger bara att det inte kom fram; traceroute säger hur långt det kom och vilken router som var den sista som svarade.
 
 5.11 [typ 1 • Kontrollfråga] Skriv den engelska termen för vart och ett av följande: routingtabell ansluten rutt, statisk rutt, nästa hopp och sub-interface. Provet frågar efter dem.
+Svar: Routing table, connected route, static route, next hop, sub-interface.
 
 5.12 [typ 2 • Räkneövning] Länken mellan Göteborg och Borås är 10.0.0.0/30. Hur många adresser innehåller nätet, hur många av dem går att sätta på ett interface, och vilka är de? Räkna, skriv inte av.
+Svar: 10.0.0.0/30 innehåller fyra adresser: 10.0.0.0, 10.0.0.1, 10.0.0.2 och 10.0.0.3. Två går att sätta på ett interface: 10.0.0.1 och 10.0.0.2. 10.0.0.0 är nätadressen och 10.0.0.3 är broadcastadressen.
+
+Resonemanget: en /30 är det minsta nät som fortfarande följer den vanliga regeln om två upptagna adresser. Det är därför den är standard på länkar mellan två routrar — den slösar två adresser, inte fler
 
 5.13 [typ 2 • Räkneövning] En kollega föreslår 10.0.0.0/24 till länken i stället. Räkna ut hur många adresser som då står oanvända, och skriv en mening om varför det ändå kan vara ett rimligt val i ett stort nät.
+Svar: En /24 ger 256 adresser, varav 254 användbara. Två används, alltså står 252 oanvända. Det kan ändå vara ett rimligt val: en organisation som ger varje länk en hel /24 slipper räkna, slipper misstag, och kan läsa av vilken länk det är direkt på adressen. Priset betalas i adresser, och i ett internt 10.-nät finns det gott om dem.
+Resonemanget: den tekniskt snålaste lösningen är inte alltid den bästa. Enhetlighet har ett värde som är svårt att räkna på men lätt att märka klockan tre på natten
 
 5.14 [typ 3 • Läs utdatan] Här är en routingtabell. Ett paket ska till 192.168.2.50. Vilken rad används, och vad händer med paketet?
 
@@ -339,6 +394,9 @@ C 192.168.1.0/26 is directly connected,
 C 10.0.0.0/30 is directly connected,
 ,→ GigabitEthernet0/2
 
+Svar: Raden S 192.168.2.0/24 via 10.0.0.2 används. Paketet skickas till 10.0.0.2, som är routern i andra änden av länken.
+Resonemanget: två rader passar adressen 192.168.2.50: 0.0.0.0/0 och 192.168.2.0/24. De två andra raderna gäller nät adressen inte ligger i. Longest prefix match väljer /24 före /0. Att paketet skickas betyder inte att det kommer fram — det beror på om den andra routern vet vägen tillbaka.
+
 5.15 [typ 3 • Läs utdatan] Här är ett utdrag från Nordviks router. Datorer i VLAN 20 når varandra men inte sin gateway. Vad är fel?
 
 R-Nordvik-1# show running-config interface
@@ -347,12 +405,32 @@ interface GigabitEthernet0/0.20
 encapsulation dot1Q 21
 ip address 192.168.1.65 255.255.255.192
 
+Svar: Raden encapsulation dot1Q 21 är fel. Sub-interfacet heter .20 och har ekonominätets adress, men lyssnar på VLAN 21, som inte finns på switchen.
+Resonemanget: datorerna i VLAN 20 når varandra genom switchen, utan att röra routern. Gatewayen når de aldrig, eftersom routern letar efter deras trafik i fel VLAN. Vanan att låta siffran efter punkten vara samma som VLAN-numret finns just för att göra det här felet synligt vid en snabb blick
+
 5.16 [typ 4 • Konfigurationsövning] Skriv den fullständiga konfigurationen för sub-interfacet mot VLAN 30 på R-Nordvik-1: rätt namn, rätt VLAN, rätt adress och rätt mask enligt bilaga G. Skriv raderna i den ordning routern kräver.
+Svar:
+interface GigabitEthernet0/0.30
+encapsulation dot1Q 30
+ip address 192.168.1.129 255.255.255.192
+
+Resonemanget: encapsulation måste stå före adressen. Routern vägrar sätta en
+adress på ett sub-interface som inte hör till något VLAN. Adressen är gästnätets
+gateway enligt bilaga G, och masken 255.255.255.192 är /26.
 
 5.17 [typ 4 • Konfigurationsövning] Skriv de två rutter som behövs för att Göteborg och Borås ska nå varandra — en på varje router. Ange på vilken router varje rad ska skrivas.
+Svar: 
+På R-Nordvik-1:
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+På R-Boras-1:
+ip route 192.168.1.0 255.255.255.0 10.0.0.1
+
+Resonemanget: rutter kommer i par. Skriver du bara den första går trafiken fram och kommer aldrig tillbaka — kapitlets vanligaste fel. Varje router pekar på den andra änden av länken, inte på det avlägsna nätet.
 
 5.18 [typ 5 • Översätt kravet] Nordviks ekonomiavdelning ska kunna nå filservern i kontorsnätet. 
 Kontorspersonalen ska inte kunna nå ekonominätet. Driftpersonalen ska nå bägge. Beskriv vad du kan lösa med routing den här veckan, och vad som måste vänta till kapitel 9. Skriv den konfiguration du faktiskt kan göra nu.
+Svar: Det du kan lösa nu är att ekonomi når filservern, genom att sub-interfacen finns och routern därmed routar mellan alla fyra näten automatiskt. Det du inte kan lösa nu är att kontoret inte ska nå ekonominätet. Routing kopplar ihop, den skiljer inte åt. Att stoppa trafik kräver en ACL, och den kommer i kapitel 9.
+Resonemanget: den här uppgiften har samma poäng som 4.18. Kravet innehåller både en koppling och en begränsning, och veckans verktyg löser bara den ena. Att säga det tydligt är en del av svaret.
 
 5.19 [typ 6 • Förklara för någon annan] Skriv fem meningar till en kollega som aldrig hört talas om routing, där du förklarar varför en ping kan gå fram utan att komma tillbaka.
 
