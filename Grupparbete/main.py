@@ -6,7 +6,7 @@ device_dict = {
     "device_type": "cisco_ios",
     "host": "192.168.1.193",
     "username": "drift",
-    "password": getpass("Losenord: "),
+    "password": getpass("Enter device password: "),
 }
 
 with ConnectHandler(**device_dict) as anslutning:
