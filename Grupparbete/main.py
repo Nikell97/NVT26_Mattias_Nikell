@@ -9,19 +9,22 @@ device_dict = {
     "password": getpass("Enter device password: "),
 }
 
+# 
 with ConnectHandler(**device_dict) as c:
     report = {
         "hostname": c.send_command("show running-config | include hostname"), # fetches only line with hostname from running config
         "program_version": c.send_command("show version | include Version"), # fetches only line with program version
         "device_model": c.send_command("show version | include Cisco CISCO"), # fetches only the line with device model
-        "interfaces": c.send_command("show ip interface brief"), 
+        "interfaces": c.send_command("show ip interface brief"), # fetches information about device interfaces
     }
 
+# Loop to display all information from the report dict
 for key, value in report.items():
     print(f"{key.replace('_', ' ').title()}:")
     print(value)
     print()
 
+# Save report dict as JSON file
 with open("rapport.json", "w", enconding="utf-8") as file:
     json.dump(report, file, indent=4, ensure_ascii=False)
 
