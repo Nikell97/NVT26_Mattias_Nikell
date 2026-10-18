@@ -27,10 +27,10 @@ with open("rapport.json", "w", enconding="utf-8") as file:
 
 print("Report saved to rapport.json")
 
-    # hostname = anslutning.send_command("show running-config | include hostname") 
-    # program_version = anslutning.send_command("show version | include Version") 
-    # device_model = anslutning.send_command("show version | include Cisco CISCO") 
-    # interfaces = anslutning.send_command("show ip interface brief") 
+    # hostname = c.send_command("show running-config | include hostname") 
+    # program_version = c.send_command("show version | include Version") 
+    # device_model = c.send_command("show version | include Cisco CISCO") 
+    # interfaces = c.send_command("show ip interface brief") 
 
 # print(f"Hostname: {hostname}")
 # print(f"Program Version: {program_version}")
