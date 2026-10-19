@@ -546,6 +546,7 @@ login local
 Resonemanget: hostname och domännamn måste finnas innan nyckeln skapas — nyckeln får sitt namn från dem. Glöms line vty 5 15 står telnet öppet på de linjerna, och det är den vanligaste halvfärdiga SSH-konfigurationen i verkligheten.
 
 6.18 [typ 5 • Översätt kravet] Nordvik har köpt upp ett företag som använder samma adressrymd som Nordvik själva. Ledningen vill att ekonomiavdelningarna på de två kontoren ska kunna nå varandras filservrar, men inget annat ska kopplas ihop. Beskriv vad du gör, i vilken ordning, och vad du behöver komma överens om med den andra sidans tekniker innan du rör något.
+
 Svar: Först måste de komma överrens med andra sidans tekniker om vilka påhittade adressrymder som ska användas åt vardera håll. Utan den överenskommelsen fungerar ingenting, och det är inget tekniskt beslut utan ett gemensamt. 
 Sedan måste de bygga översättningen i båda ändarna, så att varje sida ser den andra under en adress som inte krockar.
 Sist ska de begränsa till ekonomiservrarna. Det görs med en ACL som pekar ut just de två adresserna, inte hela nätet.
