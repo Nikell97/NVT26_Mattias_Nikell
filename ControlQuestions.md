@@ -437,33 +437,53 @@ Resonemanget: den här uppgiften har samma poäng som 4.18. Kravet innehåller b
 # Kapitel 6
 
 6.1 [typ 1 • Kontrollfråga] Ge två olika skäl till att NAT behövs.
+Svar: Adresserna räcker inte - många enheter delar på få offentliga adresser. Två nät kan krocka, t.ex. två företag som går ihop har båda samma adressrymnd.
 
 6.2 [typ 1 • Kontrollfråga] Vad betyder inside respektive outside, och sitter märkningen på nätet eller på interfacet?
+Svar: Inside är sidan där ditt eget nät ligger, outside där omvärlden ligger. Märkning sitter på interfacet, inte nätet.
 
 6.3 [typ 1 • Kontrollfråga] Vad skiljer Inside local från Inside global?
+Svar: Inside local är adressen enheten faktiskt har. Inside global är adressen omvärlden ser den som.
 
 6.4 [typ 1 • Kontrollfråga] Vad gör PAT som statisk NAT inte gör?
+Svar: PAT byter också portnummer, och kan därför låta många enheter dela på en adress. Statisk NAT kräver en offentlig adress per enhet.
 
-6.5 [typ 1 • Kontrollfråga] Varför fungerar inte en förbindelse som börjar utifrån, utan särskild konfiguration? 
+6.5 [typ 1 • Kontrollfråga] Varför fungerar inte en förbindelse som börjar utifrån, utan särskild konfiguration?
+Svar: För att en översättning skapas när någon på insidan skickar ut något. Kommer förbindelsen utifrån finns ingen anteckning, och routern vet inte vem paketet ska till. 
 
 6.6 [typ 1 • Kontrollfråga] Vilket ord i NAT-kommandot gör det till PAT?
+Svar: overload
 
 6.7 [typ 1 • Kontrollfråga] Varför är NAT ingen säkerhetsfunktion?
+Svar: För att trafik utifrån inte kan nå in är en bieffekt, inte ett skydd. Det försvinner så fort någon lägger in en vidarebefordran. Skyddet kommer från brandväggen.
 
 6.8 [typ 1 • Kontrollfråga] Vilka två saker måste finnas på enheten innan crypto key generate rsa fungerar?
+Svar: Ett hostname och ett domännamn. Nyckeln får sitt namn från de två, och utan dem vägrar kommandot.
 
 6.9 [typ 1 • Kontrollfråga] Vilken rad stänger dörren för telnet?
+Svar: transport input ssh på inloggningslinjen. Utan det står telenet fortfarande öppet.
 
 6.10 [typ 1 • Kontrollfråga] Nämn tre saker som ska bort ur en konfigurationsfil innan du committar den.
+Svar: enable secret, username secret och SNMP community strings. Även privata nycklar, om de följt med en säkerhetskopia.
 
 6.11 [typ 1 • Kontrollfråga] Skriv den engelska termen för vart och ett av följande: över-sättning, insida, utsida och sanering. Provet frågar efter dem.
+Svar: translations, inside, outside, sanitization
 
-6.12 [typ 2 • Räkneövning] Listan access-list 1 permit 192.168.1.0
-0.0.0.255 släpper ut alla fyra VLAN på en gång. Skriv i stället fyra ra-
-der, en per VLAN, med rätt wildcard-mask för en /26. Räkna fram masken, skriv
-inte av.
+6.12 [typ 2 • Räkneövning] Listan access-list 1 permit 192.168.1.0 0.0.0.255 släpper ut alla fyra VLAN på en gång. Skriv i stället fyra rader, en per VLAN, med rätt wildcard-mask för en /26. Räkna fram masken, skriv inte av.
+Svar: Wildcard-masken för en /26 är 0.0.0.63, alltså
+255.255.255.255 minus 255.255.255.192.
+access-list 1 permit 192.168.1.0 0.0.0.63
+access-list 1 permit 192.168.1.64 0.0.0.63
+access-list 1 permit 192.168.1.128 0.0.0.63
+access-list 1 permit 192.168.1.192 0.0.0.63
+Resonemanget: de fyra raderna gör samma sak som den enda raden med
+0.0.0.255, men de går att ta bort en i taget. Vill du senare stänga gästnätets väg
+ut räcker det att stryka en rad. Det är hela skälet att skriva fyra i stället för en.
 
 6.13 [typ 2 • Räkneövning] Nordvik har 70 datorer på insidan och en offentlig adress. Varje dator har i snitt tolv samtidiga förbindelser. Hur många rader står det då i show ip nat translations? Räcker portnumren?
+Svar: 0 datorer med tolv förbindelser var ger 840 rader i tabellen.
+Portnumren räcker med god marginal. PAT använder portnummer från 1024 och uppåt, alltså drygt 64 000 per offentlig adress. 840 av 64 000 är drygt en procent.
+Resonemanget: den vanliga oron är att portarna ska ta slut. Det händer, men först vid tiotusentals samtidiga förbindelser. Det som tar slut först är minnet i routern, och det syns i show ip nat statistics.
 
 6.14 [typ 3 • Läs utdatan] Här är en NAT-tabell. Hur många enheter på insidan syns i utdatan, och hur många offentliga adresser använder de?
 
@@ -475,6 +495,10 @@ tcp 203.0.113.10:1025 192.168.1.42:52815
 ↪→ 198.51.100.34:443 198.51.100.34:443
 tcp 203.0.113.10:1026 192.168.1.51:61200
 ↪→ 198.51.100.34:80 198.51.100.34:80
+
+Svar: Två enheter, 192.168.1.42 och 192.168.1.51.
+De använder en enda offentlig adress, 203.0.113.10.
+Resonemanget: tre rader men två enheter — den första datorn har två samtidiga förbindelser, en på port 80 och en på 443. Kolumnen Inside global har samma adress på alla tre rader och olika portnummer. Det är hela PAT sammanfattat i ett utdrag.
 
 6.15 [typ 3 • Läs utdatan] Här är ett utdrag från en router där ingenting kommer ut på internet. Vad är fel?
 
@@ -489,11 +513,42 @@ Hits: 0 Misses: 0
 Expired translations: 0
 Dynamic mappings:
 
+Svar: Interfacen är märkta åt fel håll. Gi0/0.10 är det interna sub-interfacet men står som outside och Gi0/1 som går ut står som inside.
+Resonemanget: raden Total active translations: 0 bekräftar att ingenting översätts alls. NAT gör bara något när ett paket går från ett inside-interface till ett outside-interface, och här går trafiken åt motsatt håll i routerns ögon. Felet är två kommandon fel och tar tio minuter att hitta om du inte känner igen det.
+
 6.16 [typ 4 • Konfigurationsövning] Skriv den fullständiga konfigurationen som ger gästnätet, och bara gästnätet, en väg ut via PAT. Alla andra nät ska lämnas orörda.
+Svar: 
+access-list 2 permit 192.168.1.128 0.0.0.63
+ip nat inside source list 2 interface GigabitEthernet0/1
+overload
+
+Sub-interfacet för gästnätet måste dessutom vara märkt:
+interface GigabitEthernet0/0.30
+ip nat inside
+
+Resonemanget: en egen lista med ett eget nummer lämnar den befintliga listan orörd.
+Att lägga till en rad i lista 1 hade ändrat vad alla andra nät får göra, och det står
+det ingenting om i uppgiften.
 
 6.17 [typ 4 • Konfigurationsövning] Skriv de rader som krävs för att slå på SSH på en router som just startats med tom konfiguration. Ta med allt som behövs, i rätt ordning. Skriv <losenord> där ett lösenord ska stå — aldrig ett riktigt.
+Svar: 
+hostname R-Nordvik-1
+ip domain-name nordvik.example
+crypto key generate rsa — svara 2048 på frågan om modulus
+username drift privilege 15 secret <losenord>
+ip ssh version 2
+line vty 0 4
+transport input ssh
+login local
+line vty 5 15
+transport input ssh
+login local
+Resonemanget: hostname och domännamn måste finnas innan nyckeln skapas — nyckeln får sitt namn från dem. Glöms line vty 5 15 står telnet öppet på de linjerna, och det är den vanligaste halvfärdiga SSH-konfigurationen i verkligheten.
 
 6.18 [typ 5 • Översätt kravet] Nordvik har köpt upp ett företag som använder samma adressrymd som Nordvik själva. Ledningen vill att ekonomiavdelningarna på de två kontoren ska kunna nå varandras filservrar, men inget annat ska kopplas ihop. Beskriv vad du gör, i vilken ordning, och vad du behöver komma överens om med den andra sidans tekniker innan du rör något.
+Svar: Först måste de komma överrens med andra sidans tekniker om vilka påhittade adressrymder som ska användas åt vardera håll. Utan den överenskommelsen fungerar ingenting, och det är inget tekniskt beslut utan ett gemensamt. 
+Sedan måste de bygga översättningen i båda ändarna, så att varje sida ser den andra under en adress som inte krockar.
+Sist ska de begränsa till ekonomiservrarna. Det görs med en ACL som pekar ut just de två adresserna, inte hela nätet.
 
 6.19 [typ 6 • Förklara för någon annan] Skriv fem meningar till en kollega som aldrig hört talas om NAT, där du förklarar hur sjuttio datorer kan dela på en enda adress.
 
