@@ -2,6 +2,7 @@ from getpass import getpass
 from netmiko import ConnectHandler
 import json
 
+#dict containing the device information neccessary for ConnectionHandler to establish ssh connection
 device_dict = {
     "device_type": "cisco_ios",
     "host": "192.168.1.193",
@@ -9,7 +10,7 @@ device_dict = {
     "password": getpass("Enter device password: "),
 }
 
-# 
+# establishes connection with device through ConnectionHandler creates a new dict called report and saves the fetched values to it
 with ConnectHandler(**device_dict) as c:
     report = {
         "hostname": c.send_command("show running-config | include hostname"), # fetches only line with hostname from running config
